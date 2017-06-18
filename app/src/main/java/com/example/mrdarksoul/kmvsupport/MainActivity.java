@@ -32,9 +32,9 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private FirebaseDatabase mFirebaseDatabase; // entry object
     private DatabaseReference mArticleDatabaseReference; // reference specific object
+    private ChildEventListener mChildEventListener;
     private ArticleAdapter mArticleAdapter;
     ListView mArticleListView;
-    ArrayList<Article> articlesArrayList = new ArrayList<>();
     private TextView articleTextView;
 
     @Override
@@ -47,11 +47,11 @@ public class MainActivity extends AppCompatActivity
         mFirebaseDatabase =  FirebaseDatabase.getInstance();
         mArticleDatabaseReference = mFirebaseDatabase.getReference().child("articles");
         mArticleListView = (ListView) findViewById(R.id.list_article);
-        attachDatabaseReadListner();
+
         List<Article> article = new ArrayList<>();
         mArticleAdapter = new ArticleAdapter(this, R.layout.single_article_list, article);
         mArticleListView.setAdapter(mArticleAdapter);
-
+        attachDatabaseReadListner();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,10 +73,39 @@ public class MainActivity extends AppCompatActivity
 
         private void attachDatabaseReadListner()
         {
-            mArticleDatabaseReference.addValueEventListener(new ValueEventListener() {
+            if(mChildEventListener==null)
+                mChildEventListener = new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                        //called whenever child added
+                        Article articles = dataSnapshot.getValue(Article.class); // DATAsnap shot has excat same field as databse and casitng in to object
+                        mArticleAdapter.add(articles);
+                        mArticleAdapter.notifyDataSetChanged();
+                }
+                    @Override
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                        //context is changed
+                    }
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+                    }
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                };
+            mArticleDatabaseReference.addChildEventListener(mChildEventListener);
+        }
+
+
+
+            /*mArticleDatabaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     Article article  = dataSnapshot.getValue(Article.class) ; // DATAsnap shot has excat same field as databse and casitng in to object
+
                     mArticleAdapter.add(article);
                 }
 
@@ -85,8 +114,7 @@ public class MainActivity extends AppCompatActivity
 
                 }
 
-            });
-        }
+            });*/
 
 
     @Override

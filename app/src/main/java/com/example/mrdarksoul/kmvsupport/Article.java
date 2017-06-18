@@ -5,90 +5,90 @@ package com.example.mrdarksoul.kmvsupport;
  */
 
 public class Article {
-    public String mTagline;
-    public String mAuthor;
-    public String mLongDesc;
-    public String mShortDec;
-    public String mContent;
-    public String mDate;
-    public String mDepartment;
-    public String mURL;
+    private String Tagline;
+    private String Author;
+    private String LongDesc;
+    private String ShortDesc;
+    private String Content;
+    private String Date;
+    private String Department;
+    private String Image;
     public Article()
     {
 
     }
-    public Article(String mTagline, String mAuthor, String mLongDesc, String mShortDec, String mContent, String mDate, String mDepartment, String mURL) {
-        this.mTagline = mTagline;
-        this.mAuthor = mAuthor;
-        this.mLongDesc = mLongDesc;
-        this.mShortDec = mShortDec;
-        this.mContent = mContent;
-        this.mDate = mDate;
-        this.mDepartment = mDepartment;
-        this.mURL = mURL;
+    public Article(String mTagline, String mAuthor, String mLongDesc, String mShortDec, String mContent, String mDate, String mDepartment, String mImage) {
+        this.Tagline = mTagline;
+        this.Author = mAuthor;
+        this.LongDesc = mLongDesc;
+        this.ShortDesc = mShortDec;
+        this.Content = mContent;
+        this.Date = mDate;
+        this.Image = mImage;
+        this.Department = mDepartment;
     }
 
     public String getmTagline() {
-        return mTagline;
+        return Tagline;
     }
 
     public void setmTagline(String mTagline) {
-        this.mTagline = mTagline;
+        this.Tagline = mTagline;
     }
 
     public String getmAuthor() {
-        return mAuthor;
+        return Author;
     }
 
     public void setmAuthor(String mAuthor) {
-        this.mAuthor = mAuthor;
+        this.Author = mAuthor;
     }
 
     public String getmLongDesc() {
-        return mLongDesc;
+        return LongDesc;
     }
 
     public void setmLongDesc(String mLongDesc) {
-        this.mLongDesc = mLongDesc;
+        this.LongDesc = mLongDesc;
     }
 
     public String getmShortDec() {
-        return mShortDec;
+        return ShortDesc;
     }
 
     public void setmShortDec(String mShortDec) {
-        this.mShortDec = mShortDec;
+        this.ShortDesc = mShortDec;
     }
 
     public String getmContent() {
-        return mContent;
+        return Content;
     }
 
     public void setmContent(String mContent) {
-        this.mContent = mContent;
+        this.Content = mContent;
     }
 
     public String getmDate() {
-        return mDate;
+        return Date;
     }
 
     public void setmDate(String mDate) {
-        this.mDate = mDate;
+        this.Date = mDate;
     }
 
     public String getmDepartment() {
-        return mDepartment;
+        return Department;
     }
 
     public void setmDepartment(String mDepartment) {
-        this.mDepartment = mDepartment;
+        this.Department = mDepartment;
     }
 
-    public String getmURL() {
-        return mURL;
+    public String getmImage() {
+        return Image;
     }
 
-    public void setmURL(String mURL) {
-        this.mURL = mURL;
+    public void setmURL(String mImage) {
+        this.Image = mImage;
     }
 }

@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,9 +31,8 @@ public class ArticleAdapter extends ArrayAdapter<Article>
         TextView articleTextView = (TextView) convertView.findViewById(R.id.article_text_view_2);
 
         Article article = getItem(position);
-
-
-        articleTextView.setText(article.getmContent());
+        String message = article.getmContent();
+        articleTextView.setText(message);
 
         return convertView;
     }
