@@ -28,11 +28,14 @@ public class ArticleAdapter extends ArrayAdapter<Article>
             convertView = ((Activity) getContext()).getLayoutInflater().inflate(R.layout.single_article_list, parent, false);
         }
 
-        TextView articleTextView = (TextView) convertView.findViewById(R.id.article_text_view_2);
+        TextView articleTaglineTextView = (TextView) convertView.findViewById(R.id.article_tagline);
+        TextView articleContentTextView = (TextView) convertView.findViewById(R.id.article_content);
 
         Article article = getItem(position);
         String message = article.getmContent();
-        articleTextView.setText(message);
+        articleContentTextView.setText(message);
+        articleTaglineTextView.setText(article.getmTagline());
+
 
         return convertView;
     }

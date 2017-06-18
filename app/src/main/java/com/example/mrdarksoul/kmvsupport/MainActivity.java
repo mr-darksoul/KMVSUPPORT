@@ -35,14 +35,13 @@ public class MainActivity extends AppCompatActivity
     private ChildEventListener mChildEventListener;
     private ArticleAdapter mArticleAdapter;
     ListView mArticleListView;
-    private TextView articleTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        articleTextView = (TextView) findViewById(R.id.article_text_view_2) ;
         setSupportActionBar(toolbar);
         mFirebaseDatabase =  FirebaseDatabase.getInstance();
         mArticleDatabaseReference = mFirebaseDatabase.getReference().child("articles");
