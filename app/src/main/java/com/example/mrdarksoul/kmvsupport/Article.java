@@ -17,78 +17,78 @@ public class Article {
     {
 
     }
-    public Article(String mTagline, String mAuthor, String mLongDesc, String mShortDec, String mContent, String mDate, String mDepartment, String mImage) {
+    public Article(String mTagline, String mAuthor, String mLongDesc, String mShortDesc, String mContent, String mDate, String mDepartment, String mImage) {
         this.Tagline = mTagline;
         this.Author = mAuthor;
         this.LongDesc = mLongDesc;
-        this.ShortDesc = mShortDec;
+        this.ShortDesc = mShortDesc;
         this.Content = mContent;
         this.Date = mDate;
         this.Image = mImage;
         this.Department = mDepartment;
     }
 
-    public String getmTagline() {
+    public String getTagline() {
         return Tagline;
     }
 
-    public void setmTagline(String mTagline) {
+    public void setTagline(String mTagline) {
         this.Tagline = mTagline;
     }
 
-    public String getmAuthor() {
+    public String getAuthor() {
         return Author;
     }
 
-    public void setmAuthor(String mAuthor) {
+    public void setAuthor(String mAuthor) {
         this.Author = mAuthor;
     }
 
-    public String getmLongDesc() {
+    public String getLongDesc() {
         return LongDesc;
     }
 
-    public void setmLongDesc(String mLongDesc) {
+    public void setLongDesc(String mLongDesc) {
         this.LongDesc = mLongDesc;
     }
 
-    public String getmShortDec() {
+    public String getShortDesc() {
         return ShortDesc;
     }
 
-    public void setmShortDec(String mShortDec) {
+    public void setShortDesc(String mShortDec) {
         this.ShortDesc = mShortDec;
     }
 
-    public String getmContent() {
+    public String getContent() {
         return Content;
     }
 
-    public void setmContent(String mContent) {
+    public void setContent(String mContent) {
         this.Content = mContent;
     }
 
-    public String getmDate() {
+    public String getDate() {
         return Date;
     }
 
-    public void setmDate(String mDate) {
+    public void setDate(String mDate) {
         this.Date = mDate;
     }
 
-    public String getmDepartment() {
+    public String getDepartment() {
         return Department;
     }
 
-    public void setmDepartment(String mDepartment) {
+    public void setDepartment(String mDepartment) {
         this.Department = mDepartment;
     }
 
-    public String getmImage() {
+    public String getImage() {
         return Image;
     }
 
-    public void setmURL(String mImage) {
+    public void setURL(String mImage) {
         this.Image = mImage;
     }
 }

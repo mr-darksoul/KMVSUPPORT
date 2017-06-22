@@ -32,9 +32,9 @@ public class ArticleAdapter extends ArrayAdapter<Article>
         TextView articleContentTextView = (TextView) convertView.findViewById(R.id.article_content);
 
         Article article = getItem(position);
-        String message = article.getmContent();
+        String message = article.getContent();
         articleContentTextView.setText(message);
-        articleTaglineTextView.setText(article.getmTagline());
+        articleTaglineTextView.setText(article.getTagline());
 
 
         return convertView;
