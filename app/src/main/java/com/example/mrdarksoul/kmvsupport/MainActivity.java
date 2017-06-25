@@ -3,6 +3,7 @@ package com.example.mrdarksoul.kmvsupport;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringDef;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
@@ -19,7 +20,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -43,9 +43,14 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     public static final int RC_SIGN_IN = 1;
+    public static final int PRIORITY_ADMIN =10;
+    public static final int PRIORITY_EDITOR =5;
+    public static final int PRIORITY_WRITER =1;
+    public static final int PRIORITY_PENDING_WRITER =-5;
     private FirebaseDatabase mFirebaseDatabase; // entry object
     private DatabaseReference mArticleDatabaseReference; // reference specific object
     private DatabaseReference mMembersRefrence;
+    private DatabaseReference mMembersIdRef;
     private ChildEventListener mChildEventListener;
     private ArticleAdapter mArticleAdapter;
     private FirebaseAuth mFirebaseAuth;
@@ -65,6 +70,7 @@ public class MainActivity extends AppCompatActivity
         mFirebaseDatabase =  FirebaseDatabase.getInstance();
         mArticleDatabaseReference = mFirebaseDatabase.getReference().child("articles");
         mMembersRefrence = mFirebaseDatabase.getReference().child("members");
+        mMembersIdRef = mFirebaseDatabase.getReference().child("members/uID");
         mArticleListView = (ListView) findViewById(R.id.list_article);
 
         mArticleAdapter = new ArticleAdapter(this, R.layout.single_article_list, mArticleEntries);
@@ -116,18 +122,18 @@ public class MainActivity extends AppCompatActivity
     //set priority 10 for admin ,5 for editor,1 for writer and -5 for pending writer
     public void storeID()
     {
-        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
-        mMembersRefrence.child("uID").child(currentFirebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        final FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+        mMembersRefrence.child("uID").addListenerForSingleValueEvent(new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
-            if(!dataSnapshot.exists())
-            {
-                FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
-                Members members = new Members(currentFirebaseUser.getUid(),2);
-                mMembersRefrence.push().setValue(members);
-
+                if (dataSnapshot.exists()) {
+                    //FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                }else
+                    {
+                        Members members = new Members(currentFirebaseUser.getUid(), PRIORITY_PENDING_WRITER);
+                        mMembersRefrence.push().setValue(members);
+                    }
             }
-        }
 
         @Override
         public void onCancelled(DatabaseError databaseError) {
