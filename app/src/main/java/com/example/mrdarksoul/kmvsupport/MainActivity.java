@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity
                 {
                     attachDatabaseReadListner();
                     storeID();
+                    checkUser();
                 }
                 else
                 {
@@ -118,7 +119,38 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+    public void checkUser()
+    {   //final FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+        mMembersRefrence.child("priority").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Members m = new Members();
+                    m = ds.getValue(Members.class);
+                    if (m.getPriority() == PRIORITY_ADMIN) {
+                        //Admin Logged in
+                    }
+                    else if (m.getPriority() == PRIORITY_EDITOR)
+                    {
+                        //Editor Logged in
+                    }
+                    else if(m.getPriority() == PRIORITY_WRITER)
+                    {
+                        //Writer logged in
+                    }
+                    else if(m.getPriority() == PRIORITY_PENDING_WRITER)
+                    {
+                        //Pending Writer Logged in
+                    }
+                }
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
     //set priority 10 for admin ,5 for editor,1 for writer and -5 for pending writer
     public void storeID()
     {
@@ -126,14 +158,18 @@ public class MainActivity extends AppCompatActivity
         mMembersRefrence.child("uID").addListenerForSingleValueEvent(new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    //FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-                }else
-                    {
-                        Members members = new Members(currentFirebaseUser.getUid(), PRIORITY_PENDING_WRITER);
-                        mMembersRefrence.push().setValue(members);
-                    }
+            for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                Members m = new Members();
+                m = ds.getValue(Members.class);
+                if (m.getuID() == currentFirebaseUser.getUid()) {
+                    //Member is present do nothing
+                } else {
+                    //Create a pending writer
+                    Members members = new Members(currentFirebaseUser.getUid(), PRIORITY_PENDING_WRITER);
+                    mMembersRefrence.push().setValue(members);
+                }
             }
+        }
 
         @Override
         public void onCancelled(DatabaseError databaseError) {
